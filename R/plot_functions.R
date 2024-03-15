@@ -282,7 +282,6 @@ plot.bulk.vs.sc <- function(sc.input,
 
 
 
-library(gplots)
 
 #' functions that plots the heatmap for the correlation bewteen each cell type from the reference 
 #' @param input: a M*G count matrix. rownames are cell IDs, while colnames are gene IDs/names.
