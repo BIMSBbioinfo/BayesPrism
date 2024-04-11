@@ -9,6 +9,9 @@ norm.to.one <- function(ref,
 
   phi <- ref / rowSums(ref) * (1 - pseudo.min * G) + pseudo.min
 
+  # Handle NAs originiating from all zero-expression rows.
+  phi[is.na(phi)] <- pseudo.min
+
   # if the minimum value is greater than zero. simply normalize by total depth
   min.value <- apply(ref, 1, min)
   which.row <- min.value > 0
