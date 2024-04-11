@@ -3,24 +3,22 @@
 #' @param ref a unnormalized matrix of dimension K*G (with rownames and colnames supplied)
 #' @param pseudo.min the desired min values to replace zero after normalization
 #' return a normalized matrix of the same dimension
-norm.to.one <- function(ref, 
-					    pseudo.min){
-	
-	G <- ncol(ref)
-		
-	phi <- ref/rowSums(ref) * (1-pseudo.min*G) + pseudo.min
-	
-	#if the minimum value is greater than zero. simply normalize by total depth
-	min.value <- apply(ref,1,min)
-	which.row <- min.value>0
-	if(any(which.row)){
-		#cat("One or more cell types have all genes with non-zero expression. pseudo.min is not applied to these cell types. \n")
-		phi[which.row,] <- ref[which.row,,drop=F]/rowSums(ref[which.row,,drop=F])
-	}
-		
-	
-	return(phi)
-	
+norm.to.one <- function(ref,
+                        pseudo.min) {
+  G <- ncol(ref)
+
+  phi <- ref / rowSums(ref) * (1 - pseudo.min * G) + pseudo.min
+
+  # if the minimum value is greater than zero. simply normalize by total depth
+  min.value <- apply(ref, 1, min)
+  which.row <- min.value > 0
+  if (any(which.row)) {
+    # cat("One or more cell types have all genes with non-zero expression. pseudo.min is not applied to these cell types. \n")
+    phi[which.row, ] <- ref[which.row, , drop = F] / rowSums(ref[which.row, , drop = F])
+  }
+
+
+  return(phi)
 }
 
 
